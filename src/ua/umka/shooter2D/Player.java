@@ -14,6 +14,8 @@ public class Player {
 	
 	private int speed;
 	
+	private double health;
+	
 	private Color color1;
 	private Color color2;
 	
@@ -36,6 +38,8 @@ public class Player {
 		dx = 0;
 		dy = 0;
 		
+		health = 3;
+		
 		color1 = Color.WHITE;
 		
 		up = false;
@@ -47,11 +51,18 @@ public class Player {
 		
 	}
 	//Functions
-	public double detX(){
+	public double getX(){
 		return x;
 	}
-	public double detY(){
+	public double getY(){
 		return y;
+	}
+	public int getR(){
+		return r;
+	}
+	
+	public void hit(){
+		health--;
 	}
 	
 	public void apdate(){

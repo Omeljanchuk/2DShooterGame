@@ -15,8 +15,8 @@ public class Bullet {
 	
 	//Constructor
 	public Bullet(){
-		x = GamePanel.player.detX();
-		y = GamePanel.player.detY();
+		x = GamePanel.player.getX();
+		y = GamePanel.player.getY();
 		r = 2;
 		
 		speed = 10;

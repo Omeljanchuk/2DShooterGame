@@ -100,19 +100,40 @@ public class GamePanel extends JPanel implements Runnable{
 				double dx = ex - bx;
 				double dy = ey - by;
 				double dist = Math.sqrt(dx * dx + dy * dy);
-				if((int)dist < e.getR() + b.getR()){
+				if((int)dist <= e.getR() + b.getR()){
 					e.hit();
 					bullets.remove(j);
-					break;
+					j--;
+					boolean remove = e.remove();
+					if(remove){
+						enemies.remove(i);
+						i--;
+						break;
+					}					
 				}
-			}
-			boolean remove = e.remove();
-			if(remove){
-				enemies.remove(i);
-				i--;
-			}
+			}			
 		}
-
+		//Player-enemy collides
+		for(int i = 0; i < enemies.size(); i++){
+			Enemy e = enemies.get(i);
+			double ex = e.getX();
+			double ey = e.getY();
+			
+			double px = player.getX();
+			double py = player.getY();
+			double dx = ex - px;
+			double dy = ey - py;
+			double dist = Math.sqrt(dx * dx + dy * dy);
+			if((int)dist <= e.getR() + player.getR()){
+				e.hit();
+				player.hit();
+				boolean remove = e.remove();
+				if(remove){
+					enemies.remove(i);
+					i--;
+				}				
+			}			
+		}
 	}
 	public void gameRender(){
 		//Background draw
