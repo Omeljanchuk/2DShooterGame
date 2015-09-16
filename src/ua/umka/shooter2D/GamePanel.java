@@ -11,6 +11,11 @@ public class GamePanel extends JPanel implements Runnable{
 	public static int WIDTH = 400;
 	public static int HEIGHT = 400;
 	
+	public static int mouseX;
+	public static int mouseY;
+	public static boolean leftMouse;
+	
+	
 	private Thread thread;
 	
 	private BufferedImage image;
@@ -21,12 +26,12 @@ public class GamePanel extends JPanel implements Runnable{
 	private long timerFPS;
 	private int sleepTime;
 	
-	private enum STATES{
+	public static enum STATES{
 		MENUE,
 		PLAY
 	}
 	
-	private STATES state = STATES.MENUE;
+	public static STATES state = STATES.MENUE;
 	
 	
 	public static GameBack background;
@@ -65,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable{
 		g = (Graphics2D) image.getGraphics();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
+		leftMouse = false;
 		background = new GameBack();
 		player = new Player();
 		bullets = new ArrayList<Bullet>();
@@ -78,6 +84,7 @@ public class GamePanel extends JPanel implements Runnable{
 			if(state.equals(STATES.MENUE)){
 				background.update();
 				background.draw(g);
+				menue.update();
 				menue.draw(g);
 				gameDraw();
 				

@@ -43,6 +43,9 @@ public class Listeners implements KeyListener, MouseListener, MouseMotionListene
 		if(key == KeyEvent.VK_SPACE){
 			Player.isFiring = false;
 		}
+		if(key == KeyEvent.VK_ESCAPE){
+			GamePanel.state = GamePanel.STATES.MENUE;
+		}
 		
 	}
 
@@ -50,16 +53,13 @@ public class Listeners implements KeyListener, MouseListener, MouseMotionListene
 		
 	}
 
-	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		GamePanel.mouseX = e.getX();
+		GamePanel.mouseY = e.getY();
 	}
-
-	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		GamePanel.mouseX = e.getX();
+		GamePanel.mouseY = e.getY();
 	}
 
 	@Override
@@ -83,12 +83,14 @@ public class Listeners implements KeyListener, MouseListener, MouseMotionListene
 		public void mousePressed(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1){
 			GamePanel.player.isFiring = true;
+			GamePanel.leftMouse = true;
 			}		
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		if(e.getButton()==MouseEvent.BUTTON1){
 			GamePanel.player.isFiring = false;
+			GamePanel.leftMouse = false;
 		}
 		
 	}

@@ -14,6 +14,7 @@ public class Menue {
 	private int buttonHeight;
 	private Color color1;
 	private String s;
+	private int transp = 0;
 	
 	//Constructor
 	public Menue(){
@@ -26,10 +27,28 @@ public class Menue {
 	
 	//Functions
 	
+	public void update(){
+		if(GamePanel.mouseX > GamePanel.WIDTH/2-buttonWidth/2 && 
+				GamePanel.mouseX < GamePanel.WIDTH + buttonWidth/2 && 
+				GamePanel.mouseY > GamePanel.HEIGHT/2 - buttonHeight/2 &&
+				GamePanel.mouseY < GamePanel.HEIGHT/2 + buttonHeight/2){
+			transp = 60;
+			if(GamePanel.leftMouse){
+				GamePanel.state = GamePanel.STATES.PLAY;
+			}
+		}else{
+			transp = 0;
+		}
+	}
+	
 	public void draw(Graphics2D g){
 		g.setColor(color1);
 		g.setStroke(new BasicStroke(3));
-		g.drawRect(GamePanel.WIDTH/2-buttonWidth/2, GamePanel.HEIGHT/2-buttonHeight/2, buttonWidth, buttonHeight);
+		g.drawRect(GamePanel.WIDTH/2-buttonWidth/2, 
+				GamePanel.HEIGHT/2-buttonHeight/2, buttonWidth, buttonHeight);
+		g.setColor(new Color (255, 255, 255, transp));
+		g.fillRect(GamePanel.WIDTH/2-buttonWidth/2, 
+				GamePanel.HEIGHT/2-buttonHeight/2, buttonWidth, buttonHeight);
 		g.setStroke(new BasicStroke(1));
 		g.setColor(color1);
 		g.setFont(new Font("Isocpeur", Font.BOLD, 33));
