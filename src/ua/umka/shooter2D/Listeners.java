@@ -2,7 +2,7 @@ package ua.umka.shooter2D;
 
 import java.awt.event.*;
 
-public class Listeners implements KeyListener {
+public class Listeners implements KeyListener, MouseListener, MouseMotionListener {
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -47,6 +47,49 @@ public class Listeners implements KeyListener {
 	}
 
 	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+		public void mousePressed(MouseEvent e) {
+		if(e.getButton() == MouseEvent.BUTTON1){
+			GamePanel.player.isFiring = true;
+			}		
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		if(e.getButton()==MouseEvent.BUTTON1){
+			GamePanel.player.isFiring = false;
+		}
 		
 	}
 

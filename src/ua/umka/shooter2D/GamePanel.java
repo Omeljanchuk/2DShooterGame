@@ -9,7 +9,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	//Field
 	public static int WIDTH = 400;
-	public static int HEIGHT = 600;
+	public static int HEIGHT = 400;
 	
 	private Thread thread;
 	
@@ -21,11 +21,20 @@ public class GamePanel extends JPanel implements Runnable{
 	private long timerFPS;
 	private int sleepTime;
 	
+	private enum STATES{
+		MENUE,
+		PLAY
+	}
+	
+	private STATES state = STATES.MENUE;
+	
+	
 	public static GameBack background;
 	public static Player player;
 	public static ArrayList<Bullet> bullets;
 	public static ArrayList<Enemy> enemies;
 	public static Wave wave;
+	public static Menue menue;
 	
 	//Constructor
 	public GamePanel(){
@@ -36,6 +45,8 @@ public class GamePanel extends JPanel implements Runnable{
 		requestFocus();
 		
 		addKeyListener(new Listeners());
+		addMouseMotionListener(new Listeners());
+		addMouseListener (new Listeners());
 	}
 	//Funtions
 	
@@ -59,18 +70,28 @@ public class GamePanel extends JPanel implements Runnable{
 		bullets = new ArrayList<Bullet>();
 		enemies = new ArrayList<Enemy>();
 		wave = new Wave();
+		menue = new Menue();
 				
-		while(true){ // TODO Status			
+		while(true){ // TODO Status	
 			timerFPS = System.nanoTime();
 			
-			gameUpdate();
-			gameRender();
-			gameDraw();
+			if(state.equals(STATES.MENUE)){
+				background.update();
+				background.draw(g);
+				menue.draw(g);
+				gameDraw();
+				
+			}
+			if(state.equals(STATES.PLAY)){
+				gameUpdate();
+				gameRender();
+				gameDraw();
+			}
 			
 			timerFPS = (System.nanoTime() - timerFPS)/1000000;
 			if(millisToFPS > timerFPS){
 				sleepTime = (int)(millisToFPS - timerFPS);
-			}else sleepTime = 1;			
+			}else sleepTime = 1;	
 			try {
 				thread.sleep(sleepTime);// TODO FPS
 			} catch (InterruptedException e) {
