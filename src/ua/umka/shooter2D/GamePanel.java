@@ -8,8 +8,8 @@ import java.util.*;
 public class GamePanel extends JPanel implements Runnable{
 	
 	//Field
-	public static int WIDTH = 400;
-	public static int HEIGHT = 400;
+	public static int WIDTH = 600;
+	public static int HEIGHT = 600;
 	
 	public static int mouseX;
 	public static int mouseY;
@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable{
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		
+						
 		leftMouse = false;
 		background = new GameBack();
 		player = new Player();
@@ -77,8 +77,20 @@ public class GamePanel extends JPanel implements Runnable{
 		enemies = new ArrayList<Enemy>();
 		wave = new Wave();
 		menue = new Menue();
+		
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		BufferedImage buffered = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g3 = (Graphics2D) buffered.getGraphics();
+		g3.setColor(new Color(225, 225, 225));
+		g3.drawOval(0, 0, 4, 4);
+		g3.drawLine(2, 0, 2, 4);
+		g3.drawLine(0, 2, 4, 2);
+		Cursor myCursor = kit.createCustomCursor(buffered, new Point(3, 3), "myCursor");
+		g3.dispose();
 				
 		while(true){ // TODO Status	
+			this.setCursor(myCursor);
+			
 			timerFPS = System.nanoTime();
 			
 			if(state.equals(STATES.MENUE)){

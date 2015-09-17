@@ -7,9 +7,15 @@ public class Bullet {
 	//Fields
 	private double x;
 	private double y;
+	private double bulletDX;
+	private double bulletDY;
+	
+	private double distX;
+	private double distY;
+	private double dist;
 	private int r;
 	
-	private int speed;
+	private double speed;
 	
 	private Color color;
 	
@@ -21,7 +27,14 @@ public class Bullet {
 		
 		speed = 10;
 		
-		color = Color.ORANGE;
+		distX = GamePanel.mouseX - x;
+		distY = GamePanel.mouseY - y;
+		dist = Math.sqrt(distX * distX + distY * distY);
+		
+		bulletDX = distX / dist * speed;
+		bulletDY = distY / dist * speed;
+				
+		color = Color.YELLOW;
 	}
 		
 	//Functions
@@ -30,14 +43,15 @@ public class Bullet {
 	public int getR(){return r;}
 	
 	public boolean remove(){
-		if(y < 0){
+		if(y < 0 || y > GamePanel.HEIGHT || x < 0 || x > GamePanel.WIDTH){
 			return true;
 		}
 		return false;
 	}
 	
 	public void update(){
-		y -= speed;
+		y += bulletDY;
+		x += bulletDX;
 		
 	}
 	public void draw(Graphics2D g){

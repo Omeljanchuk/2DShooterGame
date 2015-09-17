@@ -21,7 +21,7 @@ public class Wave {
 		waveMultiplier = 5;
 		
 		waveTimer = 0;
-		waveDelay = 5000;
+		waveDelay = 3000;
 		waveTimerDiff = 0;
 		
 		waveText = " Õ Â È Ë ß  - ";
@@ -30,14 +30,21 @@ public class Wave {
 	//Functions
 	public void createEnemies(){
 		int enemyCount = waveNumber * waveMultiplier;
-		if(waveNumber < 10){
+		if(waveNumber < 3){
 			while(enemyCount > 0){
 				int type = 1;
 				int rank = 1;
 				GamePanel.enemies.add(new Enemy(type, rank));
 				enemyCount -= type * rank;
 			}
-			
+			/*if(waveNumber >= 5 && waveNumber <10){
+				while(enemyCount > 0){
+					int type = 2;
+					int rank = 2;
+					GamePanel.enemies.add(new Enemy(type, rank));
+					enemyCount -= type * rank;
+				}
+			}*/
 		}
 		waveNumber++;
 	}

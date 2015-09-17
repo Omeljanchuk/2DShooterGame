@@ -28,8 +28,8 @@ public class Menue {
 	//Functions
 	
 	public void update(){
-		if(GamePanel.mouseX > GamePanel.WIDTH/2-buttonWidth/2 && 
-				GamePanel.mouseX < GamePanel.WIDTH + buttonWidth/2 && 
+		if(GamePanel.mouseX > GamePanel.WIDTH/2 - buttonWidth/2 && 
+				GamePanel.mouseX < GamePanel.WIDTH/2 + buttonWidth/2 && 
 				GamePanel.mouseY > GamePanel.HEIGHT/2 - buttonHeight/2 &&
 				GamePanel.mouseY < GamePanel.HEIGHT/2 + buttonHeight/2){
 			transp = 60;
